@@ -3,6 +3,7 @@ package com.emusicstore.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,12 @@ import com.emusicstore.model.Product;
 @Controller
 public class HomeController {
 	
-	private ProductDao ProductDao = new ProductDao();
+	//private ProductDao ProductDao = new ProductDao();
+	
+	@Autowired
+	private ProductDao productDao;
+	
+	
 	
 	//***Request Mappings links the jsp path or the "views" to the controller***
 	
@@ -36,9 +42,8 @@ public class HomeController {
 	 */
 	@RequestMapping("/productList")
 	public String getProducts(Model model) {
-		List<Product> products = ProductDao.getProductList();
+		List<Product> products = productDao.getAllProducts();
 		model.addAttribute("products", products); //attaching products to model
-		
 		return "productList";  
 	}
 	
@@ -47,7 +52,7 @@ public class HomeController {
 	 */
 	@RequestMapping("/productList/viewProduct/{productID}")
 	public String viewProduct(@PathVariable String productID, Model model) throws IOException{
-		Product product = ProductDao.getProductByID(productID);
+		Product product = productDao.getProductByID(productID);
 		model.addAttribute(product);
 		return "viewProduct";
 	}
