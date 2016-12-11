@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * EMusicStore
@@ -27,6 +30,9 @@ public class Product {
 	private String productStatus;
 	private int unitInStock;
 	private String productManufacturer;
+	//We don't want uploaded image file to be persisted on DB. We want this to be stored under our resources folder
+	@Transient 
+	private MultipartFile productImage; //a representation of an uploaded file received in a multipart request
 	
 	//Getters and setters
 	public String getProductID() {
@@ -82,6 +88,12 @@ public class Product {
 	}
 	public void setProductManufacturer(String productManufacturer) {
 		this.productManufacturer = productManufacturer;
+	}
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
 	}
 	
 	

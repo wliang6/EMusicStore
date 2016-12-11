@@ -1,7 +1,11 @@
 package com.emusicstore.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.nio.file.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.emusicstore.dao.ProductDao;
 import com.emusicstore.model.Product;
@@ -22,6 +27,8 @@ import com.emusicstore.model.Product;
 public class HomeController {
 	
 	//private ProductDao ProductDao = new ProductDao();
+	
+	private Path path;
 	
 	@Autowired
 	private ProductDao productDao;
@@ -95,8 +102,29 @@ public class HomeController {
 	 * AFTER added product on addProduct JSP, specify method as POST request
 	 */
 	@RequestMapping(value = "/admin/productInventory/addProduct", method = RequestMethod.POST)
-	public String addProductPost(@ModelAttribute("product") Product product) {
+	public String addProductPost(@ModelAttribute("product") Product product, HttpServletRequest request) {
 		productDao.addProduct(product);
-		return "redirect:/admin/productInventory"; //Redirecting to a path -- can't just put productInventory because modeling hasn't been done for the added object
+		MultipartFile productImage = product.getProductImage();
+		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\" + product.getProductID() + ".png");
+		if(productImage != null && !productImage.isEmpty()){
+			try{
+				productImage.transferTo(new File(path.toString())); //saves the image to this directory path and saves to new type .png file
+			} catch(Exception e){   
+				e.printStackTrace();
+				throw new RuntimeException("Product image saving failed.", e);
+			}
+		}
+		return "redirect:/admin/productInventory"; //Redirecting to a different path -- can't just put productInventory because modeling hasn't been done for the added object
+	}   //Redirect tells the controller that this is not a JSP page but it is a pathname
+
+
+	/*
+	 * deleteProduct JSP view corresponding to the product's ID
+	 */
+	@RequestMapping("/admin/productInventory/deleteProduct/{productID}")
+	public String deleteProduct(@PathVariable String productID, Model model){
+		productDao.deleteProduct(productID);
+		return "redirect:/admin/productInventory";
 	}
 }
