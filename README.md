@@ -1,7 +1,14 @@
 # EMusicStore
 Building online music store from scratch!.. because <i>why not?</i>
 
+
 <b>Frameworks</b>: Spring MVC, Spring Data, Spring Security, Spring REST, Spring Web Flow, Hibernate, Angular JS, JSP, Bootstrap, H2 Database and more
+
+Front-end: HTML, CSS, Bootstrap, JSP, JavaScript, JQuery 
+
+Back-end: Spring MVC, Spring Security, Spring Webflow 
+
+Database: Spring Data, JPA, Hibernate, H2
 
 Skills to obtain after completion of this Java Web Application:
 
@@ -32,3 +39,7 @@ JSTL Core tags provide support for iteration, conditional logic, catch exception
 JSTL tags expose information as JSP Expression Language variables like this : 
 `<a href="<c:url value="/productList" />">Products</a></li>` 
 or `<c:forEach items="${products}" var="product"> `
+
+
+<b>H2 Database</b> is a Java SQL database that has a console that is browser based. It is a fast, open source, JDBC API and offers embedded and server modes.
+http://h2database.com/html/main.html
