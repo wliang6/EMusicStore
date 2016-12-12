@@ -28,7 +28,7 @@
 				</thead>
 				<c:forEach items="${products}" var="product">   <!-- JSTL tag- "product" represents each instance of products -->
 				<tr>
-					<td><img src="#" alt="image"/></td>
+					<td><img src="<c:url value="/resources/images/${product.productID}.png" /> " alt="image" style="width:100%"/></td>
 					<td>${product.productName}</td>
 					<td>${product.productCategory}</td>
 					<td>${product.productCondition}</td>

@@ -1,0 +1,17 @@
+.table{
+	table-layout: fixed;    /* fixed the width of each column  */
+	overflow: auto;
+} 
+
+.table th{
+	text-align: center;
+}
+
+.table td{
+	text-align: center;
+	background: whitesmoke;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

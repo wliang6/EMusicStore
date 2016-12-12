@@ -105,8 +105,10 @@ public class HomeController {
 	public String addProductPost(@ModelAttribute("product") Product product, HttpServletRequest request) {
 		productDao.addProduct(product);
 		MultipartFile productImage = product.getProductImage();
-		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\" + product.getProductID() + ".png");
+		//String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		String rootDirectory = "/Users/Winnie/Documents/workspace/eMusicStore/src/main/webapp";
+		path = Paths.get(rootDirectory + "//WEB-INF//resources//images//" + product.getProductID() + ".png");
+		System.out.println("Path: " + path);
 		if(productImage != null && !productImage.isEmpty()){
 			try{
 				productImage.transferTo(new File(path.toString())); //saves the image to this directory path and saves to new type .png file
@@ -123,7 +125,17 @@ public class HomeController {
 	 * deleteProduct JSP view corresponding to the product's ID
 	 */
 	@RequestMapping("/admin/productInventory/deleteProduct/{productID}")
-	public String deleteProduct(@PathVariable String productID, Model model){
+	public String deleteProduct(@PathVariable String productID, Model model, HttpServletRequest request){
+		//String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		String rootDirectory = "/Users/Winnie/Documents/workspace/eMusicStore/src/main/webapp";
+		path = Paths.get(rootDirectory + "//WEB-INF//resources//images//" + productID + ".png");
+		if(Files.exists(path)){
+			try{
+				Files.delete(path);
+			} catch(IOException e){
+				e.printStackTrace();
+			}
+		}
 		productDao.deleteProduct(productID);
 		return "redirect:/admin/productInventory";
 	}
