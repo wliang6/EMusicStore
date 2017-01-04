@@ -2,7 +2,10 @@ package com.emusicstore.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -102,12 +105,14 @@ public class HomeController {
 	 * AFTER added product on addProduct JSP, specify method as POST request
 	 */
 	@RequestMapping(value = "/admin/productInventory/addProduct", method = RequestMethod.POST)
-	public String addProductPost(@ModelAttribute("product") Product product, HttpServletRequest request) {
+	public String addProductPost(@ModelAttribute("product") Product product, HttpServletRequest request) throws URISyntaxException {
 		productDao.addProduct(product);
 		MultipartFile productImage = product.getProductImage();
 		//String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 		String rootDirectory = "/Users/Winnie/Documents/workspace/eMusicStore/src/main/webapp";
 		path = Paths.get(rootDirectory + "//WEB-INF//resources//images//" + product.getProductID() + ".png");
+
+		
 		System.out.println("Path: " + path);
 		if(productImage != null && !productImage.isEmpty()){
 			try{
@@ -137,6 +142,37 @@ public class HomeController {
 			}
 		}
 		productDao.deleteProduct(productID);
+		return "redirect:/admin/productInventory";
+	}
+	
+	/*
+	 * editProduct JSP view corresponding to product's ID. In the get method we already specified ID
+	 */
+	@RequestMapping("/admin/productInventory/editProduct/{id}")
+	public String editProduct(@PathVariable("id") String id, Model model) {
+		Product product = productDao.getProductByID(id);
+		model.addAttribute(product);
+		return "editProduct";
+	}
+	
+	
+	/*
+	 * This method is a post method
+	 */
+	@RequestMapping(value = "/admin/productInventory/editProduct", method = RequestMethod.POST)
+	public String editProduct(@ModelAttribute("product") Product product, Model model, HttpServletRequest request) {
+		MultipartFile productImage = product.getProductImage();
+		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		path = Paths.get(rootDirectory + "//WEB-INF//resources//images//" + product.getProductID() + ".png");
+		if(productImage != null && !productImage.isEmpty()){
+			try{
+				productImage.transferTo(new File(path.toString()));
+			} catch(Exception e){
+				throw new RuntimeException("Product image saving failed", e);
+			}
+		}
+		
+		productDao.editProduct(product);
 		return "redirect:/admin/productInventory";
 	}
 }

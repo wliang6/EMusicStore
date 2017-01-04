@@ -37,6 +37,8 @@
 					<span class="glyphicon glyphicon-info-sign"></span> </a> <!-- When icon is clicked, it grabs product ID and transfers it to controller (business logic- backend fetches product from database), returns product object to controller and controller forwards to view page -->
 					<a href="<spring:url value="/admin/productInventory/deleteProduct/${product.productID}" />" >   <!-- Spring tag is used to visit the url path and passing the dynamic variable productID -->
 					<span class="glyphicon glyphicon-remove"></span> </a>
+					<a href="<spring:url value="/admin/productInventory/editProduct/${product.productID}" />" >   <!-- Spring tag is used to visit the url path and passing the dynamic variable productID -->
+					<span class="glyphicon glyphicon-pencil"></span> </a>
 					</td>
 				</tr>
 				</c:forEach>

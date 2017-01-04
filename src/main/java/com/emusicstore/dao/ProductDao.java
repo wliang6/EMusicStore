@@ -13,6 +13,7 @@ import com.emusicstore.model.Product;
 public interface ProductDao {
 	
 	void addProduct(Product product);
+	void editProduct(Product product);
 	Product getProductByID(String productID);
 	List<Product> getAllProducts();
 	void deleteProduct(String id);
