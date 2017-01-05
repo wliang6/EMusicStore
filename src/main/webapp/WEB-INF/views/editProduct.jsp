@@ -1,8 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-	
-	<!-- LEAD TO HEADER FILE template/header.jsp -->
+<!-- LEAD TO HEADER FILE template/header.jsp -->
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   <!-- import spring tag to use the header and footer we just created in "template" folder -->
 <%@include file="/WEB-INF/views/template/header.jsp" %>
 
