@@ -15,9 +15,9 @@ Skills to obtain after completion of this Java Web Application:
 - Use Spring MVC to implement MVC framework - <b><i>Complete</i></b>
 - Use Bootstrap to quickly develop front-end view - <b><i>Complete</i></b>
 - Develop domain classes to model the business entities - <b><i>Complete</i></b>
-- Upload static resources such as images with the application
-- Use Spring Data to integrate with Hibernate and JPA to persist model objects
-- Use Spring Data, Hibernate or JPA for data validation
+- Upload static resources such as images with the application - <b><i>Complete</i></b>
+- Use Spring Data to integrate with Hibernate and JPA to persist model objects - <b><i>Complete</i></b>
+- Use Spring Data, Hibernate or JPA for data validation - <b><i>Complete</i></b>
 - Use Spring Security for login control
 - Develop REST service APIs with Spring Framework
 - Use Angular JS to consume REST services
@@ -43,3 +43,11 @@ or `<c:forEach items="${products}" var="product"> `
 
 <b>H2 Database</b> is a Java SQL database that has a console that is browser based. It is a fast, open source, JDBC API and offers embedded and server modes.
 http://h2database.com/html/main.html
+
+<b>Spring Data JPA</b> stores and retrieves data in a relational database in a way that it eliminates boilerplate code. (It persists java object models into the database.) Example annotations used: @Entity indicates the our object class "Product" is an entity object in the table, @Id defines a unique primary key in table.
+
+<b>Hibernate Validator</b> is used to validate the user-fields entered in "add product details" and "edit product details". Example annotations used: @NotEmpty(message = "") - field cannot be empty,  @Min(value=0, message = "") - field has to be over a certain min number.
+
+<b>Spring Security</b> can be configured to provide login and logout capabilities and to check the authenticity of admin/users in an application. We would like to use our own login page and then delegate the request to spring login URL. 
+
+![SpringSecurity](http://i64.tinypic.com/2lbzad.png)
