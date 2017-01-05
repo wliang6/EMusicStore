@@ -9,10 +9,12 @@ import java.net.URL;
 import java.nio.file.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -105,7 +107,12 @@ public class HomeController {
 	 * AFTER added product on addProduct JSP, specify method as POST request
 	 */
 	@RequestMapping(value = "/admin/productInventory/addProduct", method = RequestMethod.POST)
-	public String addProductPost(@ModelAttribute("product") Product product, HttpServletRequest request) throws URISyntaxException {
+	public String addProductPost(@Valid @ModelAttribute("product") Product product, BindingResult result, HttpServletRequest request) throws URISyntaxException {
+		//@Valid spring checks if the product field is valid or not based on annotation defined here
+		//if result detects error, it would return to editProduct page
+		if(result.hasErrors()){
+			return "addProduct"; //return to addProduct page
+		}
 		productDao.addProduct(product);
 		MultipartFile productImage = product.getProductImage();
 		//String rootDirectory = request.getSession().getServletContext().getRealPath("/");
@@ -157,10 +164,15 @@ public class HomeController {
 	
 	
 	/*
-	 * This method is a post method
+	 * AFTER editing product on editProduct JSP, specify method as POST request
 	 */
 	@RequestMapping(value = "/admin/productInventory/editProduct", method = RequestMethod.POST)
-	public String editProduct(@ModelAttribute("product") Product product, Model model, HttpServletRequest request) {
+	public String editProduct(@Valid @ModelAttribute("product") Product product, Model model, BindingResult result, HttpServletRequest request) {
+		//@Valid spring checks if the product field is valid or not based on annotation defined here
+		//if result detects error, it would return to editProduct page
+		if(result.hasErrors()){
+			return "editProduct"; //return to editProduct page
+		}
 		MultipartFile productImage = product.getProductImage();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 		path = Paths.get(rootDirectory + "//WEB-INF//resources//images//" + product.getProductID() + ".png");
