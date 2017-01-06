@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
 <!-- Creating Database Connection here -->
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -34,4 +35,27 @@
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	<property name="maxUploadSize" value="1024000"/>
 </bean>
+
+
+<!-- Spring Security Configurations -->
+<security:http auto-config="true">
+	<security:intercept-url pattern="/admin/**" access="ROLE_USER" />
+	<security:form-login 
+		login-page="/login"
+		default-target-url="/admin/"
+		authentication-failure-url="/login?error"
+		username-parameter="username"
+		password-parameter="password" />
+	<security:logout
+		logout-success-url="/login?logout" />
+</security:http>
+
+<security:authentication-manager>
+    <security:authentication-provider>
+        <security:jdbc-user-service data-source-ref="dataSource"
+                                    authorities-by-username-query="SELECT username, authority From authorities WHERE username = ?"
+                                    users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?" />
+    </security:authentication-provider>
+</security:authentication-manager>
+
 </beans>

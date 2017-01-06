@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Product.java
  */
 
-@Entity //Tells Spring that this class is an entity to be stored as a table 
+@Entity //Tells Spring Data that this class is an entity to be stored as a table 
 		//database. Whenever Spring is running, automatically generate database and persist this table into database
 		//One class = one table; one instance of class = one row in table
 public class Product {

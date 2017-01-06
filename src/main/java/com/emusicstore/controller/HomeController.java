@@ -115,8 +115,8 @@ public class HomeController {
 		}
 		productDao.addProduct(product);
 		MultipartFile productImage = product.getProductImage();
-		//String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		String rootDirectory = "/Users/Winnie/Documents/workspace/eMusicStore/src/main/webapp";
+		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		//String rootDirectory = "/Users/Winnie/Documents/workspace/eMusicStore/src/main/webapp";
 		path = Paths.get(rootDirectory + "//WEB-INF//resources//images//" + product.getProductID() + ".png");
 
 		
