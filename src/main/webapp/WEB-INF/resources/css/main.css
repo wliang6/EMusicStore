@@ -28,3 +28,13 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.login-box{
+	test-align: center;
+}
+
+.login-container{
+	width: 40%;
+	margin: auto;
+	margin-top: 100px;
+}
