@@ -16,14 +16,17 @@
 
     <title>EMusic Store</title>
 
+	<!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"> </script>
+
     <!-- Bootstrap core CSS -->
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
     
-     <!-- Carousel CSS -->
-	 <link href="<c:url value="/resources/css/carousel.css" />" rel="stylesheet">
+    <!-- Carousel CSS -->
+	<link href="<c:url value="/resources/css/carousel.css" />" rel="stylesheet">
     
     <!-- main.css -->
-	 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
   </head>
 <!-- NAVBAR
 ================================================== -->
