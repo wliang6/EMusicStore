@@ -4,7 +4,7 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-<!-- Creating Database Connection here -->
+<!-- Creating H2 Database Connection here -->
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="org.h2.Driver"/>
     <property name="url" value=" jdbc:h2:tcp://localhost/~/test" />
@@ -50,6 +50,7 @@
 		logout-success-url="/login?logout" />
 </security:http>
 
+<!-- User schema is taken from this link: http://docs.spring.io/spring-security/site/docs/3.0.x/reference/appendix-schema.html -->
 <security:authentication-manager>
     <security:authentication-provider>
         <security:jdbc-user-service data-source-ref="dataSource"
