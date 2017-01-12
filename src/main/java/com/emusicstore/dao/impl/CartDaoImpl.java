@@ -3,9 +3,12 @@ package com.emusicstore.dao.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.emusicstore.dao.CartDao;
 import com.emusicstore.model.Cart;
 
+@Repository //Spring registers this class as a bean -- @Repository, @Controller or @Service are all the same
 public class CartDaoImpl implements CartDao{
 
 	private Map<String, Cart> listOfCarts;
