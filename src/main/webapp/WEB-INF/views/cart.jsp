@@ -1,5 +1,7 @@
 <%@include file="/WEB-INF/views/template/header.jsp" %>
 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <div class="container-wrapper">
 	<div class="container">
 		<section>
@@ -16,7 +18,8 @@
 			<!-- initCartId will add a new cart -->
 			<div ng-controller = "cartCtrl" ng-init="initCartId('${cartId}')">
 			<div>
-				<a class="btn btn-danger pull-left"><span class="glyphicon glyphicon-remove-sign"></span>Clear Cart</a>
+				<a class="btn btn-danger pull-left" ng-click="clearCart()">
+				<span class="glyphicon glyphicon-remove-sign"></span>Clear Cart</a>
 			</div>
 			<table class="table table-hover">
 				<tr>  <!-- header row of table -->
@@ -38,15 +41,15 @@
 					<th></th>
 					<th></th>
 					<th>Grand Total</th>
-					<th>grandTotal</th>
+					<th>{{cart.grandTotal}}</th>
 					<th></th>
 				</tr>
 			</table>
-			<a href="<spring:url value="productList"/> ">Continue Shopping</a>
+			<a href="<spring:url value="/productList"/> " class="btn btn-default">Continue Shopping</a>
 			</div>
 		</section>
 	</div>
 </div>
 
-
+<script src="<c:url value="/resources/js/controller.js" /> "></script>
 <%@include file="/WEB-INF/views/template/footer.jsp" %>

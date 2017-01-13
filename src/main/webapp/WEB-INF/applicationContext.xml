@@ -48,6 +48,7 @@
 		password-parameter="password" />
 	<security:logout
 		logout-success-url="/login?logout" />
+<!-- 	<security:csrf disabled="true"/> -->
 </security:http>
 
 <!-- User schema is taken from this link: http://docs.spring.io/spring-security/site/docs/3.0.x/reference/appendix-schema.html -->
