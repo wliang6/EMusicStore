@@ -19,9 +19,9 @@ public class CartItemController {
 	}
 	
 	//Adding cartId to model
-	@RequestMapping(value="/{cartId}", method = RequestMethod.GET)
-	public String getCart(@PathVariable (value = "cartId") String cartId, Model model){
-		model.addAttribute("cartId", cartId);
+	@RequestMapping(value="/{cartID}", method = RequestMethod.GET)
+	public String getCart(@PathVariable (value = "cartID") String cartID, Model model){
+		model.addAttribute("cartID", cartID);
 		return "cart"; //return to cart page
 	}
 }

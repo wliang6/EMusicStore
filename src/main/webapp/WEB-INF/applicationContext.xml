@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:security="http://www.springframework.org/schema/security" 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <bean id="filterMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="100000000" />
+    </bean>
 
 <!-- Creating H2 Database Connection here -->
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -38,8 +42,9 @@
 
 
 <!-- Spring Security Configurations -->
-<security:http auto-config="true">
-	<security:intercept-url pattern="/admin/**" access="ROLE_USER" />
+<security:http auto-config="true" use-expressions="true">
+	<security:anonymous enabled="true" />
+	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_USER')" />
 	<security:form-login 
 		login-page="/login"
 		default-target-url="/admin/"
@@ -48,7 +53,8 @@
 		password-parameter="password" />
 	<security:logout
 		logout-success-url="/login?logout" />
-<!-- 	<security:csrf disabled="true"/> -->
+    <!-- <security:csrf disabled="true"/>  -->
+    <security:csrf />
 </security:http>
 
 <!-- User schema is taken from this link: http://docs.spring.io/spring-security/site/docs/3.0.x/reference/appendix-schema.html -->

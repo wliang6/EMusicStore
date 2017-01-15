@@ -34,34 +34,34 @@ public class CartController {
 	//We can manipulate the responseBody through other annotations: addResponseEntity - gives flexibility to control header and HTTPResponse header as well  
 	//Retrieve cartId from path variable and put it as a new string.
 	//Access cartDao object to read cartId. 
-	@RequestMapping(value="/{cartId}", method=RequestMethod.GET)
-	public @ResponseBody Cart read (@PathVariable(value="cartId") String cartId) {
-		return cartDao.read(cartId);
+	@RequestMapping(value="/{cartID}", method=RequestMethod.GET)
+	public @ResponseBody Cart read (@PathVariable(value="cartID") String cartID) {
+		return cartDao.read(cartID);
 	}
 	//HTTP METHODS ----
 	//GET (read), POST (post info to url & take info for something else), PUT (update info), DELETE (delete info)
-	@RequestMapping(value="/{cartId}", method=RequestMethod.PUT)
+	@RequestMapping(value="/{cartID}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	//@RequestBody takes body of request and transfer into a cart object
-	public void update(@PathVariable(value = "cartId") String cartId, @RequestBody Cart cart) {
-		cartDao.update(cartId, cart);
+	public void update(@PathVariable(value = "cartID") String cartID, @RequestBody Cart cart) {
+		cartDao.update(cartID, cart);
 	}
 	
-	@RequestMapping(value="/{cartId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/{cartID}", method=RequestMethod.DELETE)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable(value = "cartId") String cartId) {
-		cartDao.delete(cartId);
+	public void delete(@PathVariable(value = "cartID") String cartID) {
+		cartDao.delete(cartID);
 	}
 	
-	@RequestMapping(value="/add/{productId}", method=RequestMethod.PUT)
+	@RequestMapping(value="/add/{productID}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void addItem(@PathVariable(value = "productId") String productId, HttpServletRequest req) {
+	public void addItem(@PathVariable(value = "productID") String productID, HttpServletRequest req) {
 		String sessionId = req.getSession(true).getId();
 		Cart cart = cartDao.read(sessionId);
 		if(cart == null) { //if cart does not exist, create new cart with the sessionId
 			cart = cartDao.create(new Cart(sessionId));
 		}
-		Product product = productDao.getProductByID(productId);
+		Product product = productDao.getProductByID(productID);
 		if(product == null) {
 			throw new IllegalArgumentException(new Exception());
 		}
@@ -69,15 +69,15 @@ public class CartController {
 		cartDao.update(sessionId, cart);
 	}
 	
-	@RequestMapping(value="/remove/{productId}", method=RequestMethod.PUT)
+	@RequestMapping(value="/remove/{productID}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void removeItem(@PathVariable String productId, HttpServletRequest req) {
+	public void removeItem(@PathVariable String productID, HttpServletRequest req) {
 		String sessionId = req.getSession(true).getId();
 		Cart cart = cartDao.read(sessionId);
 		if(cart == null) { //if cart does not exist, create new cart with the sessionId
 			cart = cartDao.create(new Cart(sessionId));
 		}
-		Product product = productDao.getProductByID(productId);
+		Product product = productDao.getProductByID(productID);
 		if(product == null) {
 			throw new IllegalArgumentException(new Exception());
 		}

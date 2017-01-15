@@ -17,7 +17,7 @@
 			
 			<!-- http://getbootstrap.com/css/#grid -->
 			<!-- ng-app declares Angular JS for this container  -->
-			<div class="container" ng-app="cartApp">
+			<div class="container" data-ng-app="cartApp">
 				<div class="row">
 					<div class="col-md-5">
 						<img src="<c:url value="/resources/images/${product.productID}.png" /> " alt="image" style="width:100%"/>
@@ -53,9 +53,9 @@
 							<c:set var="url" scope="page" value="/admin/productInventory" />
 						</c:if>
 						
-						<p ng-controller="cartCtrl">
+						<p data-ng-controller="cartCtrl">
 							<a href="<c:url value="${url}" />" class="btn btn-default">Back</a>
-							<a href="#" class="btn btn-warning btn-large" ng-click="addToCart('${product.productID}')">
+							<a href="#" class="btn btn-warning btn-large" data-ng-click="addToCart('${product.productID}')">
 							<span class="glyphicon glyphicon-shopping-cart"></span> Order Now</a>
 							<a href="<spring:url value="/cart" />" class="btn btn-default">
 							<span class="glyphicon glyphicon-hand-right"></span> View Cart</a>

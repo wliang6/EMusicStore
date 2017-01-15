@@ -23,7 +23,7 @@
 				</div>
 				<input type="submit" value="Submit" class="btn btn-default">
 <!-- 				CSRF - Cross Site Request Forgery token is included to make form submission valid for safety purpose- Spring Security protects app from CSRF attacks  -->
-				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+     			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> 
 			</form>
 		</div>
 	</div>
