@@ -51,3 +51,7 @@ http://h2database.com/html/main.html
 <b>Spring Security</b> can be configured to provide login and logout capabilities and to check the authenticity of admin/users in an application. We would like to use our own login page and then delegate the request to spring login URL. 
 
 ![SpringSecurity](http://i64.tinypic.com/2lbzad.png)
+
+![Entity Diagram](http://i65.tinypic.com/w8qemg.png)
+
+![Business Logic Diagram](http://i66.tinypic.com/69jecw.png)
